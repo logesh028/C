@@ -36,7 +36,9 @@ void insertAtpos(int val,int pos){
         temp->next=newNode;
         
 }
-
+void sizeofLList(){
+    
+}
 
 
 
