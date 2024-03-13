@@ -54,21 +54,60 @@ void sizeofLList(){
     }
     printf("Count of the Linked List :%d",count);
 }
-
+void insertatanyposition(int pos,int data){
+    struct node *newnode= (struct node*)malloc(sizeof(struct node));
+    newnode->data = data;
+    struct node *temp = head;
+    for(int i=0;i<pos-1;i++){
+        temp = temp->next;
+    }
+     newnode->next=temp->next;
+     temp->next=newnode;
+}
+void delete(int pos){
+    struct node *temp=head;
+    if(pos==0){
+        head=head->next;
+        return;
+    }
+    struct node *pre ;
+    for(int i=0;i<pos;i++){
+        pre = temp;
+        temp=temp->next;
+    }
+    pre->next = temp->next;
+    printf("\nLinkedList Element Deleted !!");
+}
+void deleteatend(){
+    struct node *temp = head;
+    struct node *pre;
+    while (temp->next!=NULL)
+    {
+        pre = temp;
+        temp=temp->next;
+    }
+    if(pre == NULL){
+        head = NULL;
+    }else{
+    pre->next = NULL;
+    }
+ printf("\nLinkedList Element Deleted at end!!");
+    
+}
 int main(){
     
-    int choice=0;
+    int choice=0,pos;
     int data;
-    while(choice!=5){
+    while(choice!=8){
         printf("\nEnter Your Choice");
         printf("\nEnter 1 to insert data at starting");
         printf("\nEnter 2 to display LinkedList");
         printf("\nEnter 3 to insert data at ending");
-        printf("\nEnter 4 to count the LinkedList\n");
-        scanf("%d",&choice);
-        
-        
-        
+        printf("\nEnter 4 to count the LinkedList");
+        printf("\nEnter 5 to insert data at any position");
+        printf("\nEnter 6 to delete LinkedList Element at any position");
+        printf("\nEnetr 7 to delete LinkedList Element at end position\n");
+        scanf("%d",&choice);        
         switch(choice){
             case 1:
                 printf("Enter your data insert at starting : ");
@@ -89,8 +128,31 @@ int main(){
                 break;
             case 4:
                 sizeofLList();
+                break;
             case 5:
+                printf("\nEnter your position :");
+                scanf("%d",&pos);
+                printf("Enter the data: ");
+                scanf("%d",&data);
+                if(head==NULL){
+                    insertatbegining(data);
+                }
+                else{
+                    insertatanyposition(pos,data);
+                }
+                break;
+            case 6:
+                printf("\nEnter your position :");
+                scanf("%d",&pos);
+                delete(pos);
+                break;
+            case 7:
+                deleteatend();
+                break;
+            case 8:
                 exit(0);
+            default:
+            printf("InValid Choice !!. Please Enter valid Choice ");
         }
     }
     
